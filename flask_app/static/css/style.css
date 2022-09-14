@@ -1,0 +1,14 @@
+body {
+    background-color: #ddd;
+}
+
+.container {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.form-floating {
+    color: #000;
+}

@@ -1,0 +1,66 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">{{title}}</h1>
+    <div class="d-flex align-items-center">
+        <div class="col">
+            <h2 class="text-center mb-3">Register</h2>
+            <form action="#" method="post">
+                <div class="form-floating mb-3">
+                    <input type="text" name="fname" id="fname" placeholder="John" class="form-control">
+                    <label for="fname">First Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" name="lname" id="lname" placeholder="Doe" class="form-control">
+                    <label for="lname">Last Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="email" name="email" id="email" placeholder="name@example.com" class="form-control">
+                    <label for="email">Email</label>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="form-floating">
+                        <input type="password" name="password" id="regpassword" placeholder="PleaseDontUsePassword" class="form-control">
+                        <label for="password">Password</label>
+                    </div>
+                    <div class="input-group-text">
+                        <input type="checkbox" name="showpass" id="showregpass" class="form-check-input mt-0">
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="form-floating">
+                        <input type="password" name="confirm" id="conpassword" placeholder="PleaseDontUsePassword" class="form-control">
+                        <label for="confirm">Password</label>
+                    </div>
+                    <div class="input-group-text">
+                        <input type="checkbox" name="showpass" id="showconpass" class="form-check-input mt-0">
+                    </div>
+                </div>
+                <input type="button" value="Register" class="btn btn-primary">
+            </form>
+        </div>
+        <div class="col-auto mx-5">
+            <h3 class="text-center">OR</h3>
+        </div>
+        <div class="col">
+            <h2 class="text-center mb-3">Login</h2>
+            <form action="#" method="post">
+                <div class="form-floating mb-3">
+                    <input type="email" name="email" id="email" placeholder="name@example.com" class="form-control">
+                    <label for="email">Email</label>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="form-floating">
+                        <input type="password" name="password" id="logpassword" placeholder="PleaseDontUsePassword" class="form-control">
+                        <label for="password">Password</label>
+                    </div>
+                    <div class="input-group-text">
+                        <input type="checkbox" name="showpass" id="showlogpass" class="form-check-input mt-0">
+                    </div>
+                </div>
+                <input type="button" value="Login" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

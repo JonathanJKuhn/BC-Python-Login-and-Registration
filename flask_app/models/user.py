@@ -76,8 +76,11 @@ class User:
             year_difference = today.year - dob_date.year
             age = year_difference - one_or_zero
             return age
-
-        if age(user['dob']) < 10:
+            
+        if len(user['dob']) <= 0:
+            flash("Please set your Date of Birth")
+            is_valid = False
+        elif age(user['dob']) < 10:
             flash("Sorry, you must be at least 10 years old to register")
             is_valid = False
 

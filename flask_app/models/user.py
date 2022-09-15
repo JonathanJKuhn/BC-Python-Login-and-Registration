@@ -1,6 +1,7 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
 import re
+from datetime import date, datetime
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 NAME_REGEX = re.compile(r'^[a-zA-Z]{2,}$')
@@ -62,6 +63,24 @@ class User:
         if not user['password'] == user['confirm']:
             flash("Password does not match Confirm Password")
             is_valid = False
+
+        def age(dob:str) -> date:
+            dob_list =  dob.split('-')
+            dob_year = int(dob_list[0])
+            dob_month = int(dob_list[1])
+            dob_day = int(dob_list[2])
+            dob_date = date(dob_year,dob_month,dob_day)
+
+            today = date.today()
+            one_or_zero = ((today.month, today.day) < (dob_date.month, dob_date.day))
+            year_difference = today.year - dob_date.year
+            age = year_difference - one_or_zero
+            return age
+
+        if age(user['dob']) < 10:
+            flash("Sorry, you must be at least 10 years old to register")
+            is_valid = False
+
 
         if is_valid:
             query = "SELECT * FROM users WHERE email = %(email)s;"

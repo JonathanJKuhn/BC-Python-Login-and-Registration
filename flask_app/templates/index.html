@@ -2,16 +2,16 @@
 {% block content %}
 <div class="container mt-5">
     <h1 class="text-center">{{title}}</h1>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p class="alert alert-danger">{{message}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
     <div class="d-flex align-items-center">
         <div class="col">
             <h2 class="text-center mb-3">Register</h2>
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    {% for message in messages %}
-                        <p class="alert alert-danger">{{message}}</p>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
             <form action="/register" method="post">
                 <div class="form-floating mb-3">
                     <input type="text" name="fname" id="fname" placeholder="John" value="{{session['fname']}}" class="form-control">
@@ -55,7 +55,7 @@
         </div>
         <div class="col">
             <h2 class="text-center mb-3">Login</h2>
-            <form action="#" method="post">
+            <form action="/login" method="post">
                 <div class="form-floating mb-3">
                     <input type="email" name="email" id="logemail" placeholder="name@example.com" class="form-control">
                     <label for="email">Email</label>

@@ -1,5 +1,5 @@
 from flask_app import app
-from flask import render_template, redirect, request, session
+from flask import render_template, redirect, request, session, flash
 from flask_bcrypt import Bcrypt
 from flask_app.models.user import User
 
@@ -25,20 +25,30 @@ def register():
             session[key] = data[key]
         return redirect('/')
     
-    session.clear()
     pw_hash = bcrypt.generate_password_hash(request.form.get('password'))
     data['password'] = pw_hash
-    new_user = {
-        'id': User.add(data)
-    }
-    user_obj = User.get_user(new_user)
-    for attr, value in user_obj.__dict__.items():
-        session[attr] = value
+    new_user = User.add(data)
+    session['id'] = new_user
+    return redirect('/dashboard')
+
+@app.route('/login', methods=['POST'])
+def login():
+    data = { 'email': request.form.get('email') }
+    user_in_db = User.get_user_by_email(data)
+    if not user_in_db:
+        flash("Invalid Email/Password")
+        return redirect('/')
+    if not bcrypt.check_password_hash(user_in_db.password, request.form.get('password')):
+        flash("Invalid Email/Password")
+        return redirect('/')
+    session['id'] = user_in_db.id
     return redirect('/dashboard')
 
 @app.route('/dashboard')
 def dashboard():
-    return render_template('dashboard.html',title='Dashboard')
+    data = { 'id': session['id'] }
+    user_data = User.get_user_by_id(data)
+    return render_template('dashboard.html',title='Dashboard',user=user_data)
 
 @app.route('/logout')
 def logout():

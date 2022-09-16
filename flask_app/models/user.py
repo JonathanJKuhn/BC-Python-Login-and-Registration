@@ -34,7 +34,10 @@ class User:
     def get_user_by_email(cls, data):
         query = "SELECT * FROM users WHERE email = %(email)s;"
         result = connectToMySQL('login_schema').query_db(query, data)
-        return cls(result[0])
+        if not result:
+            return False
+        else:
+            return cls(result[0])
 
     @staticmethod
     def validate_registration(user):

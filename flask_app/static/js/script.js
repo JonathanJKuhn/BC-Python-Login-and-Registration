@@ -1,21 +1,3 @@
-// function toggleShowPassword() {
-//     var regpass = $("#regpassword")
-//     var conpass = $("#conpassword")
-//     var logpass = $("logpassword")
-//     console.log($("#regpassword").prop('type'))
-//     if($("#regpassword").prop('type') === "password") {
-//         regpass.type = "text";
-//         conpass.type = "text";
-//         console.log("Should be Text")
-//         console.log($("#regpassword").prop('type'))
-//     } else {
-//         regpass.type = "password";
-//         conpass.type = "password";
-//         console.log("After change to pass")
-//     }
-// }
-
-// $("#showPass").click(toggleShowPassword)
 var reg = document.getElementById("regpassword")
 var con = document.getElementById("conpassword")
 var log = document.getElementById("logpassword")
